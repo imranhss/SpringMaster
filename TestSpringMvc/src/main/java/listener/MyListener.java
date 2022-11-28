@@ -21,7 +21,7 @@ public class MyListener implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent sce) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("COntext Running");
+		System.out.println("Context Running");
 		List<ToDo> list=new ArrayList<ToDo>();
 		ServletContext con=sce.getServletContext();
 		con.setAttribute("list", list);		
