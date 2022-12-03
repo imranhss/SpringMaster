@@ -40,5 +40,7 @@ public class StudentDao {
 		return hibernateTemplate.get(Student.class, id);
 
 	}
+	
+	
 
 }

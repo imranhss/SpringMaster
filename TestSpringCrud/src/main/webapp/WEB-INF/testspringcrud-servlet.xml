@@ -5,15 +5,20 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        ">
 
-	<mvc:annotation-driven />
+
+	<tx:annotation-driven />
 
 
 	<context:component-scan
@@ -31,7 +36,7 @@
 	<bean
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		name="ds">
-		<property name="driverClass" value="com.jdbc.mysql.Driver" />
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/crudspring" />
 		<property name="username" value="root" />
@@ -43,7 +48,7 @@
 	<bean
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
 		name="factory">
-		<property name="datasource" ref="ds" />
+		<property name="dataSource" ref="ds" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -52,7 +57,7 @@
 			</props>
 		</property>
 
-		<property name="annotationClasses">
+		<property name="annotatedClasses">
 			<list>
 				<value>entity.Student</value>
 			</list>

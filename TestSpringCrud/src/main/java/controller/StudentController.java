@@ -12,5 +12,13 @@ public class StudentController {
 		
 		return "home";
 	}
+	
+	@RequestMapping("/addStudent")
+	public String addStudent() {
+		
+		return "student_form";
+	}
+	
+	
 
 }
