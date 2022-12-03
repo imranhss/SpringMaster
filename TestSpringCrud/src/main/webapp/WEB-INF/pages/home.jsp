@@ -1,12 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@include file="template.jsp"%>
+
 </head>
 <body>
-Hello from home.jsp
+	<div class="container">
+		<h3 class="text-center">All Student</h3>
+		<table class="table table-striped">
+		
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Cell</th>
+				<th>Gender</th>
+				<th>Subject</th>
+				<th>Action</th>
+			</tr>
+			
+			<c:forEach items="${list}" var="s">
+			<tr>
+				<td>${s.id}</td>
+				<td>${s.name}</td>
+				<td>${s.email}</td>
+				<td>${s.cell}</td>
+				<td>${s.gender}</td>
+				<td>${s.subject}</td>
+				<td>
+					<a class="btn btn-danger" href="/delete-student/${s.id}"> Delete</a>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+
+	</div>
+
+
 </body>
 </html>
