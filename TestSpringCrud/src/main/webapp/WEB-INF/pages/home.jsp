@@ -31,7 +31,9 @@
 				<td>${s.gender}</td>
 				<td>${s.subject}</td>
 				<td>
-					<a class="btn btn-danger" href="/delete-student/${s.id}"> Delete</a>
+					<a class="btn btn-danger" href="/delete-student/${s.id}"><i class="fa-sharp fa-solid fa-trash"></i></a>
+					<a class="btn btn-danger" href="/edit-student/${s.id}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+					
 				</td>
 			</tr>
 			</c:forEach>

@@ -2,7 +2,7 @@ package controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,5 +60,13 @@ public class StudentController {
 		 return redirectView;
 	}
 	
+	@RequestMapping("/edit-student/{id}")
+	public String  updateForm(@PathVariable("id") int id, Model model) {
+		
+		Student s=dao.getById(id);
+		model.addAttribute("student", s);
+		
+		return "update_form";
+	}
 
 }

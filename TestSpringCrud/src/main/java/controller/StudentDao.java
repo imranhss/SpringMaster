@@ -20,7 +20,7 @@ public class StudentDao {
 	@Transactional
 	public void create(Student s) {
 
-		hibernateTemplate.save(s);
+		hibernateTemplate.saveOrUpdate(s);
 	}
 
 	public java.util.List<Student> getAll() {
