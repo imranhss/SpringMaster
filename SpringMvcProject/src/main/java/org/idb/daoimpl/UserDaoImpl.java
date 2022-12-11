@@ -3,79 +3,84 @@ package org.idb.daoimpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.id.dao.BaseDao;
-import org.id.dao.IUserDao;
+
+import org.idb.dao.BaseDao;
+import org.idb.dao.IUserDao;
 import org.idb.entity.User;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 
+public class UserDaoImpl extends BaseDao implements IUserDao{
 
-@Repository
-public class UserDaoImpl extends BaseDao implements IUserDao {
-
-	
 	@Override
 	public void save(User u) {
 		// TODO Auto-generated method stub
-		String sql = "insert into user(name, phone, email, address, loginName, password, role,loginStatus) "
-				+ "values(:name, :phone, :email, :address, :loginName, :password, :role, :loginStatus)";
-
-		Map m = new HashMap<>();
-
+		String sql="insert into user(name,email,address,phone,loginName,role,userStatus,password)"
+				+ "values(:name,:email,:address,:phone,:loginName,:role,:userStatus,:password)";
+		
+		Map m=new HashMap();
+		
 		m.put("name", u.getName());
-		m.put("phone", u.getPhone());
-		m.put("emil", u.getEmail());
+		m.put("email", u.getEmail());
 		m.put("address", u.getAddress());
+		m.put("phone", u.getPhone());
 		m.put("loginName", u.getLoginName());
+		m.put("role", u.getRole());
+		m.put("userStatus", u.getUserStatus());
 		m.put("password", u.getPassword());
-		m.put("role", u.getRole());
-		m.put("loginStatus", u.getLoginStatus());
-
-		KeyHolder kh = new GeneratedKeyHolder();
-
-		SqlParameterSource ps = new MapSqlParameterSource(m);
-
+		
+		KeyHolder kh=new GeneratedKeyHolder();
+		
+		SqlParameterSource ps=new MapSqlParameterSource(m);
+		
 		getNamedParameterJdbcTemplate().update(sql, ps, kh);
-		Integer userId = kh.getKey().intValue();
+		
+		Integer userId=kh.getKey().intValue();
+		
 		u.setUserId(userId);
-
-	}
-
-	@Override
-	public void update(User u) {
-		String sql = "update user  set name=:name," + "email=:email, " + "address=:address, " + "role=:role,"
-				+ "loginStatus=:loginStatus" + "where userId=:userId";
-
-		Map m = new HashMap<>();
-
-		m.put("name", u.getName());
-		m.put("phone", u.getPhone());
-		m.put("emil", u.getEmail());
-		m.put("address", u.getAddress());
-		m.put("role", u.getRole());
-		m.put("loginStatus", u.getLoginStatus());
-		m.put("userId", u.getUserId());
-
-		getNamedParameterJdbcTemplate().update(sql, m);
 		
 
 	}
 
 	@Override
-	public void delete(User u) {
+	public void update(User u) {
 		// TODO Auto-generated method stub
-		this.delete(u.getUserId());
+		
+		String sql="update  user set "
+				+ "name=:name,"
+				+ "email=:email,"
+				+ "address=:address,"
+				+ "phone=:phone,"
+				+ "password=:password "
+				+ "where userId=:userId";
+				
+		
+		Map m=new HashMap();
+		
+		m.put("name", u.getName());
+		m.put("email", u.getEmail());
+		m.put("address", u.getAddress());
+		m.put("phone", u.getPhone());	
+		m.put("password", u.getPassword()); 
+		m.put("userId", u.getUserId());
+		
+		
+		getNamedParameterJdbcTemplate().update(sql, m);
+		
 	}
 
 	@Override
-	public void delete(int userid) {
+	public void delete(User u) {
 		// TODO Auto-generated method stub
-		String sql="delete from user where userid=?";
-		getJdbcTemplate().update(sql, userid);
-				
+		
+	}
+
+	@Override
+	public void delete(int userId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -95,5 +100,7 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }

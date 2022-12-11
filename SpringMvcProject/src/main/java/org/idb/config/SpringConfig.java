@@ -18,18 +18,24 @@ public class SpringConfig extends WebMvcConfigurerAdapter{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
+		// external resources like css, js, images
 		super.addResourceHandlers(registry);
 	}
 	
 	@Bean
 	public ViewResolver resolver() {
-	InternalResourceViewResolver vr=new InternalResourceViewResolver();
-	vr.setViewClass(JstlView.class);
-	vr.setPrefix("/WEB-INF/views/");
-	vr.setSuffix(".jsp");
-	
-	return vr;
+		
+		InternalResourceViewResolver rv=new InternalResourceViewResolver();
+		
+		rv.setViewClass(JstlView.class);
+		
+		rv.setPrefix("/WEB-INF/views/");
+		rv.setSuffix(".jsp");
+		
+		return rv;
 		
 	}
 	
+
+
 }
