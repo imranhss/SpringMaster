@@ -1,4 +1,4 @@
-package org.id.dao;
+package org.idb.dao;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface IContactDao {
 	
 	public void delete(Contact c);
 	
-	public Contact delete(int contactId);
+	public void delete(int contactId);
 	
 	public Contact   findById(int contactId);
 	

@@ -1,10 +1,11 @@
-package org.id.dao;
+package org.idb.dao;
 
 import java.util.List;
 
 import org.idb.entity.User;
 
 public interface IUserDao {
+	
 	public void save(User u);
 	
 	public void update(User u);

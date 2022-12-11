@@ -1,11 +1,16 @@
-package org.idb.daoimpl;
+package org.idb.dao;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD:SpringProject/src/main/java/org/idb/daoimpl/UserDaoImpl.java
 import org.id.dao.BaseDao;
 import org.id.dao.IUserDao;
+=======
+
+>>>>>>> 5fa36e9e02f47424e2cdd9e7555ea729d0cf4b19:SpringProject/src/main/java/org/idb/dao/UserDaoImpl.java
 import org.idb.entity.User;
+import org.idb.rm.UserRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -27,7 +32,7 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 
 		m.put("name", u.getName());
 		m.put("phone", u.getPhone());
-		m.put("emil", u.getEmail());
+		m.put("email", u.getEmail());
 		m.put("address", u.getAddress());
 		m.put("loginName", u.getLoginName());
 		m.put("password", u.getPassword());
@@ -81,19 +86,29 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 	@Override
 	public User findById(int userId) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql="select userId, nama, phone, email, address,loginName, role, loginStatus where userId=?";
+		User u=getJdbcTemplate().queryForObject(sql,new UserRowMapper(), userId);
+		
+		return u;
 	}
 
 	@Override
 	public List<User> findByProperty(String propertyName, Object objectValue) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql="select userId, nama, phone, email, address,loginName, role, loginStatus from user"
+				+ " where"+propertyName+"=?";
+		
+		
+		return getJdbcTemplate().query(sql,new UserRowMapper(), objectValue);
 	}
 
 	@Override
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		String sql="select userId, name, phone, email, address, loginName, role, loginStatus from user";
+		
+		List<User> list= getJdbcTemplate().query(sql, new UserRowMapper());
+		return list;
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.id.dao;
+package org.idb.dao;
 
 import javax.sql.DataSource;
 
