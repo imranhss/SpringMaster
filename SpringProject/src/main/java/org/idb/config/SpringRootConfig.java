@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = {"org.idb.dao","org.idb.service"})
+@ComponentScan(basePackages = {"org.idb.dao","org.idb.service", "org.idb"})
 public class SpringRootConfig {
 
 	@Bean

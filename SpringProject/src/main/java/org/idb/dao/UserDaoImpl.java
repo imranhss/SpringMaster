@@ -3,12 +3,6 @@ package org.idb.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-<<<<<<< HEAD:SpringProject/src/main/java/org/idb/daoimpl/UserDaoImpl.java
-import org.id.dao.BaseDao;
-import org.id.dao.IUserDao;
-=======
-
->>>>>>> 5fa36e9e02f47424e2cdd9e7555ea729d0cf4b19:SpringProject/src/main/java/org/idb/dao/UserDaoImpl.java
 import org.idb.entity.User;
 import org.idb.rm.UserRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
