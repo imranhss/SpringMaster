@@ -30,8 +30,7 @@ public class UserServiceImpl extends BaseDao implements IUserService {
 	@Override
 	public User login(String loginName, String password) throws UserBlockException {
 		// TODO Auto-generated method stub
-		String sql = "select userId, name, phone, email,role loginName from user "
-				+ "where loginName=:ln and password=:pw";
+		String sql = "select userId, name, phone, email, role, address, loginName, loginStatus from user where loginName=:ln and password=:pw";
 		Map m = new HashMap();
 
 		m.put("ln", loginName);
