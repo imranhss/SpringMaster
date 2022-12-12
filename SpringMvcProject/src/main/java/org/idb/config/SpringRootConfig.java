@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = "org.idb")
+@ComponentScan(basePackages = {"org.idb.dao", "org.idb.daoimpl", "org.idb.service"})
 public class SpringRootConfig {
 
 	// database

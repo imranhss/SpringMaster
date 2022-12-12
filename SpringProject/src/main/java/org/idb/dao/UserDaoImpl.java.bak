@@ -96,7 +96,6 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 		
 		
 		return getJdbcTemplate().query(sql,new UserRowMapper(), objectValue);
-		
 	}
 
 	@Override
