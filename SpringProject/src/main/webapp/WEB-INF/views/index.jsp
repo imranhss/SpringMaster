@@ -8,7 +8,16 @@
 <%@include file="template.jsp"%>
 </head>
 <body>
+<%@include file="menu.jsp"%>
 	<div class="container mt-5">
+		<c:if test="${param.act eq 'reg' }">
+			<p class="text-success text-center">Registration Successful</p>
+		</c:if>
+		
+			<c:if test="${param.act eq 'lo' }">
+			<p class="text-success text-center">Logout Successful</p>
+		</c:if>
+		
 		<form:form action="/login" method="post" modelAttribute="login">
 			<div class="form-group">
 				<form:input path="loginName" class="form-control"

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.idb.entity.User;
 import org.idb.entity.UserLogin;
+import org.idb.entity.UserReg;
 import org.idb.exception.UserBlockException;
 import org.idb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,12 +79,37 @@ public class UserController {
 		return "dashboard_admin";
 	} 
 	
+	@RequestMapping(value={"/logout"})
+	public String logout(HttpSession session) {		
+		session.invalidate();
+		return "redirect:/?act=lo";  //query string  ?act=lo
+	} 
+	
 	private void userInSession(User u, HttpSession session) {
 		
 		session.setAttribute("user", u);
 		session.setAttribute("userId", u.getUserId());
 		session.setAttribute("role", u.getRole());
 		
+	}
+	@RequestMapping("/reg_form")
+	public String registrationForm(Model m) {
+		UserReg ur=new UserReg();	
+		
+		m.addAttribute("register", ur);
+		return "reg_form";
+	}
+	
+	@RequestMapping("/register")
+	public String registration(@ModelAttribute("register") UserReg ur, Model m) {
+		User user=ur.getUser();
+		
+		user.setRole(IUserService.ROLE_USER);
+		user.setLoginStatus(IUserService.LOGIN_STATUS_ACTIVE);		
+		service.userRegiter(user);	
+		
+		m.addAttribute("register", ur);
+		return "redirect:/?act=reg ";
 	}
 	
 }
