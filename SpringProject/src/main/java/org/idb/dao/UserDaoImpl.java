@@ -3,8 +3,11 @@ package org.idb.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD
 import org.id.dao.BaseDao;
 import org.id.dao.IUserDao;
+=======
+>>>>>>> 2bd2137568b7535a24463160f5e59cddfb6f5b39
 import org.idb.entity.User;
 import org.idb.rm.UserRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
