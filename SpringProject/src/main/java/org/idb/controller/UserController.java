@@ -78,11 +78,11 @@ public class UserController {
 		return "dashboard_admin";
 	} 
 	
-	private void userInSession(User u, HttpSession httpSession) {
+	private void userInSession(User u, HttpSession session) {
 		
-		httpSession.setAttribute("user", u);
-		httpSession.setAttribute("userId", u.getUserId());
-		httpSession.setAttribute("role", u.getRole());
+		session.setAttribute("user", u);
+		session.setAttribute("userId", u.getUserId());
+		session.setAttribute("role", u.getRole());
 		
 	}
 	

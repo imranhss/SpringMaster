@@ -7,6 +7,6 @@
 <%@include file="template.jsp"%>
 </head>
 <body>
-<%@include file="admin_menu.jsp"%>
+<%@include file="menu.jsp"%>
 </body>
 </html>

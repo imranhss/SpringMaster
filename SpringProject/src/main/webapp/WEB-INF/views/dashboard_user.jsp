@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-dashboard_user
+<%@include file="menu.jsp"%>
+user
 </body>
 </html>
