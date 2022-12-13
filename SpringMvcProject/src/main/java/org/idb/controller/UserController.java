@@ -1,5 +1,7 @@
 package org.idb.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.idb.entity.User;
 import org.idb.entity.UserLogin;
 import org.idb.exception.UserBlockException;
@@ -27,7 +29,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute("login") UserLogin ul, Model m ) {
+	public String login(@ModelAttribute("login") UserLogin ul, Model m, HttpSession httpSession) {
 		try {
 			User u = service.login(ul.getLoginName(), ul.getPassword());
 
@@ -38,16 +40,19 @@ public class UserController {
 			} else {
 				if (u.getRole() == IUserService.ROLE_ADMIN) {
 
+					sessionInUser(u, httpSession);
+
 					return "redirect:/admin/dashboard";
-				}
-				else if (u.getRole() == IUserService.ROLE_USER) {
+
+				} else if (u.getRole() == IUserService.ROLE_USER) {
+					
+					sessionInUser(u, httpSession);
 
 					return "redirect:/user/dashboard";
-				}
-				else {
-					
+				} else {
+
 					m.addAttribute("err", "U r not authorised");
-					return "redirect:/";	
+					return "redirect:/";
 				}
 
 			}
@@ -58,7 +63,6 @@ public class UserController {
 			return "home";
 		}
 
-		
 	}
 
 	@RequestMapping(value = "/user/dashboard")
@@ -72,5 +76,22 @@ public class UserController {
 
 		return "admin_dashboard";
 	}
+
+	public void sessionInUser(User u, HttpSession httpSession) {
+
+		httpSession.setAttribute("user", u);
+		httpSession.setAttribute("userId", u.getUserId());
+		httpSession.setAttribute("role", u.getRole());
+
+	}
+	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession httpSession) {
+		
+		httpSession.invalidate();
+		
+		return "redirect:/";
+	}
+	
 
 }

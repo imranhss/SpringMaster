@@ -7,6 +7,7 @@
 <%@include file="template.jsp" %>
 </head>
 <body>
-admin_dashboard
+<%@include file="header.jsp" %>
+
 </body>
 </html>

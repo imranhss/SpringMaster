@@ -3,10 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+
 <%@include file="template.jsp" %>
 </head>
 <body>
-user_dashboard
+<%@include file="header.jsp" %>
+
 </body>
 </html>
