@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.idb.entity.User;
 import org.idb.entity.UserLogin;
+import org.idb.entity.UserReg;
 import org.idb.exception.UserBlockException;
 import org.idb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,8 +91,31 @@ public class UserController {
 		
 		httpSession.invalidate();
 		
-		return "redirect:/";
+		return "redirect:/?act=lo";
 	}
 	
-
+	@RequestMapping(value = "/reg_form")
+	public String reg_form(Model m) {
+		
+		UserReg ur=new UserReg();
+		
+		m.addAttribute("registration", ur);		
+		return "reg_form";
+	}
+		
+	
+	@RequestMapping(value = "/user_reg")
+	public String userReg(@ModelAttribute("registration") UserReg ur, Model m) {
+		
+		User user=ur.getUser();
+		
+		user.setRole(IUserService.ROLE_USER);
+		user.setUserStatus(IUserService.LOGIN_STATUS_ACTIVE);
+		
+		service.userRegister(user);		
+			
+		return "redirect:/?act=reg";
+	}
+	
+	
 }

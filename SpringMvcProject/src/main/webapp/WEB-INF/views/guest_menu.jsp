@@ -18,7 +18,7 @@
           <a class="nav-link active" aria-current="page" href="/user/dashboard">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Register</a>
+          <a class="nav-link active" href="/reg_form">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="/">Login</a>

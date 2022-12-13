@@ -13,6 +13,20 @@
 <%@include file="header.jsp" %>
 
 	<div class="container mt-3">
+		<c:if test="${param.act eq 'lo'}">
+			<p class="text-success text-center">
+				Logout Successful
+			</p>
+		</c:if>
+		
+		<c:if test="${param.act eq 'reg'}">
+			<p class="text-success text-center">
+				Sign Up Successful
+			</p>
+		</c:if>
+		
+		
+	
 		<f:form action="login" method="post" modelAttribute="login">
 		
 			<div class="form-group">
