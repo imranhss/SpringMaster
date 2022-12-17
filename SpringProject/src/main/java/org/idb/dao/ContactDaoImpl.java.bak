@@ -75,7 +75,7 @@ public class ContactDaoImpl extends BaseDao implements IContactDao {
 	@Override
 	public Contact findById(int contactId) {
 		// TODO Auto-generated method stub
-		String sql="select contact userId, name, email, phone, address, remarks from contact"
+		String sql="insert into contact userId, name, email, phone, address, remarks"
 				+ "where contactId=?";
 		 return getJdbcTemplate().queryForObject(sql, new ContactRowMapper(), contactId);
 		
