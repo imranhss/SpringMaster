@@ -11,6 +11,7 @@ public class ContactRowMapper implements RowMapper<Contact>{
 	@Override
 	public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
 		// TODO Auto-generated method stub
+		
 		Contact c=new Contact();
 		
 		c.setContactId(rs.getInt("contactId"));

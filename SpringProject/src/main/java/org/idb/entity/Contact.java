@@ -2,8 +2,8 @@ package org.idb.entity;
 
 public class Contact {
 
-	private int contactId;
-	private int userId;
+	private Integer contactId;
+	private Integer userId;
 	private String name;
 	private String phone;
 	private String email;

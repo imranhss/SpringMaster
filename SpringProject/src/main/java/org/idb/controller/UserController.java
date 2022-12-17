@@ -8,6 +8,7 @@ import org.idb.entity.UserReg;
 import org.idb.exception.UserBlockException;
 import org.idb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,10 +30,10 @@ public class UserController {
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String handle_login(@ModelAttribute("login") UserLogin ul, Model m, HttpSession httpSession) {
-		System.out.println("++++++++++++++++++++++++++++++");
+		
 		try {
 			User loginUser= service.login(ul.getLoginName(), ul.getPassword());
-			System.out.println(ul.getLoginName()+"++++"+ul.getPassword());
+			
 			if(loginUser==null) {
 				m.addAttribute("err", "Login Failed enter valied user name and apssword");
 				return "index"; //login form
@@ -41,12 +42,12 @@ public class UserController {
 				if(loginUser.getRole()==IUserService.ROLE_ADMIN) {
 					
 					userInSession(loginUser, httpSession);
-					System.out.println("admin ");
+					
 					return "redirect:/admin/dashboard";					
 				}
 				else if(loginUser.getRole()==IUserService.ROLE_USER) {
 					userInSession(loginUser, httpSession);
-					System.out.println("User ");
+					
 					return "redirect:/user/dashboard";
 					
 				}
@@ -85,7 +86,7 @@ public class UserController {
 		return "redirect:/?act=lo";  //query string  ?act=lo
 	} 
 	
-	private void userInSession(User u, HttpSession session) {
+	public void userInSession(User u, HttpSession session) {
 		
 		session.setAttribute("user", u);
 		session.setAttribute("userId", u.getUserId());
@@ -102,14 +103,25 @@ public class UserController {
 	
 	@RequestMapping("/register")
 	public String registration(@ModelAttribute("register") UserReg ur, Model m) {
-		User user=ur.getUser();
 		
-		user.setRole(IUserService.ROLE_USER);
-		user.setLoginStatus(IUserService.LOGIN_STATUS_ACTIVE);		
-		service.userRegiter(user);	
+		try {
+			User user=ur.getUser();
+			
+			user.setRole(IUserService.ROLE_USER);
+			user.setLoginStatus(IUserService.LOGIN_STATUS_ACTIVE);		
+			service.userRegiter(user);	
+			
+			m.addAttribute("register", ur);
+			return "redirect:/?act=reg";
+		}
+		catch (DuplicateKeyException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			m.addAttribute("err", "Username is already registerd");
+			return "redirect:/?act=reg reg_form";
+			
+		}
 		
-		m.addAttribute("register", ur);
-		return "redirect:/?act=reg ";
 	}
 	
 }

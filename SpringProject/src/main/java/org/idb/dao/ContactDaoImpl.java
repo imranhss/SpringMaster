@@ -18,19 +18,18 @@ public class ContactDaoImpl extends BaseDao implements IContactDao {
 	@Override
 	public void save(Contact c) {
 		// TODO Auto-generated method stub
-		String sql ="INSERT INTO contact (userId, name, phone, email, remarks) VALUES (:userId, :name, :email, :phone, :remarks)";
+		String sql ="INSERT INTO contact (userId, name, phone, email, remarks) VALUES(:userId, :name, :phone,:email,:remarks)";		
 		
+		Map m = new HashMap<>();
 		
-		Map m = new HashMap();
-
 		m.put("userId", c.getUserId());
 		m.put("name", c.getName());
 		m.put("email", c.getEmail());
 		m.put("phone", c.getPhone());
 		m.put("remarks", c.getRemarks());
 
-		SqlParameterSource ps = new MapSqlParameterSource();
 		KeyHolder kh = new GeneratedKeyHolder();
+		SqlParameterSource ps = new MapSqlParameterSource(m);
 		getNamedParameterJdbcTemplate().update(sql, ps, kh);
 		Integer contactId = kh.getKey().intValue();
 		c.setContactId(contactId);
@@ -75,7 +74,7 @@ public class ContactDaoImpl extends BaseDao implements IContactDao {
 	@Override
 	public Contact findById(int contactId) {
 		// TODO Auto-generated method stub
-		String sql="select contact userId, name, email, phone, address, remarks from contact"
+		String sql="select contact userId, name, email, phone, address, remarks from contact "
 				+ "where contactId=?";
 		 return getJdbcTemplate().queryForObject(sql, new ContactRowMapper(), contactId);
 		
@@ -85,17 +84,17 @@ public class ContactDaoImpl extends BaseDao implements IContactDao {
 	@Override
 	public List<Contact> findByProperty(String propertyName, Object objectValue) {
 		// TODO Auto-generated method stub
-		String sql="select contact userId, name, email, phone, address, remarks from contact"
-				+ "where"+propertyName+"=?";
-		 return getJdbcTemplate().query(sql, new ContactRowMapper(), propertyName);
+		
+		String sql="select contactId, userId, name, email, phone, remarks from contact where "+propertyName+"=?";
+		
+		return getJdbcTemplate().query(sql, new ContactRowMapper(), propertyName);
 		
 	}
 
 	@Override
 	public List<Contact> findAll() {
 		// TODO Auto-generated method stub
-		String sql="insert into contact userId, name, email, phone, address, remarks"
-				;
+		String sql="select userId, name, email, phone, address, remarks from contact";
 		 return getJdbcTemplate().query(sql, new ContactRowMapper());
 		
 		

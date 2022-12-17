@@ -16,7 +16,7 @@ public interface IContactService {
 
 	//this methjod user contact logged uder
 	
-	public List<Contact> findUserContact(int userId);
+	public List<Contact> findUserContact(Integer userId);
 
 	// search user by text
 	public List<Contact> findUserContact(int userId, String txt);

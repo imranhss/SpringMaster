@@ -47,8 +47,9 @@ public class ContactServiceImpl extends BaseDao implements IContactService{
 	}
 
 	@Override
-	public List<Contact> findUserContact(int userId) {
+	public List<Contact> findUserContact(Integer userId) {
 		// TODO Auto-generated method stub
+		
 		return dao.findByProperty("userId", userId);
 		
 	}

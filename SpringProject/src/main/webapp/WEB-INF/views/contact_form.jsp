@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,36 +15,30 @@
 		<p class="error text-center"><c:out value="${err}"></c:out></p>
 	</c:if>
 	
-		<form:form action="/register" method="post" modelAttribute="register">
+		<form:form action="/user/save_contact" method="post" modelAttribute="contact">
+			
 			<div class="form-group">
-				<form:input path="user.name" class="form-control"
+				<form:input path="name" class="form-control"
 					placeholder="User Full Name" />
 			</div>
 
+			
 			<div class="form-group mt-2">
-				<form:input path="user.phone" class="form-control"
-					placeholder="Phone Number" />
-			</div>
-			<div class="form-group mt-2">
-				<form:input path="user.email" class="form-control"
+				<form:input path="email" class="form-control"
 					placeholder="Email Address" />
 			</div>
 			<div class="form-group mt-2">
-				<form:textarea path="user.Address" class="form-control"
-					placeholder="Postal Address" />
+				<form:input path="phone" class="form-control"
+					placeholder="Phone" />
 			</div>
 			
 			<div class="form-group mt-2">
-				<form:input path="user.loginName" class="form-control"
-					placeholder="user Name" />
+				<form:textarea path="remarks" class="form-control"
+					placeholder="Remarks" />
 			</div>
-			<div class="form-group mt-2">
-				<form:password path="user.password" class="form-control"
-					placeholder="Your Password" />
-			</div>
-
+			
 			<div class="container text-center mt-2">
-				<button class="btn btn-success">Signup</button>
+				<button class="btn btn-success">Add Contact</button>
 			</div>
 		</form:form>
 
