@@ -13,6 +13,7 @@ public class Contact {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+		
 
 	public Contact(int contactId, int userId, String name, String phone, String email, String remarks) {
 		super();
@@ -23,6 +24,8 @@ public class Contact {
 		this.email = email;
 		this.remarks = remarks;
 	}
+
+
 
 	public int getContactId() {
 		return contactId;
@@ -71,5 +74,7 @@ public class Contact {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+	
 
 }

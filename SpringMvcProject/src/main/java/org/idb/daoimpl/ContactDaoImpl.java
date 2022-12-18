@@ -13,7 +13,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ContactDaoImpl extends BaseDao implements IContactDao {
 
 	@Override
@@ -86,7 +88,7 @@ public class ContactDaoImpl extends BaseDao implements IContactDao {
 	@Override
 	public List<Contact> findByProperty(String propertyName, Object objectValue) {
 		// TODO Auto-generated method stub
-		String sql="select userId, name, email, phone, remarks from contact where "+propertyName+"=?";
+		String sql="select contactId, userId, name, email, phone, remarks from contact where "+propertyName+"=?";
 		
 		return getJdbcTemplate().query(sql, new ContactRowMapper(), objectValue);
 	}

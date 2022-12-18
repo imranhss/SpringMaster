@@ -8,7 +8,9 @@ import org.idb.entity.Contact;
 import org.idb.rm.ContactRowMapper;
 import org.idb.util.StringUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ContactServiceImpl extends BaseDao implements IContactService{
 	
 	@Autowired
