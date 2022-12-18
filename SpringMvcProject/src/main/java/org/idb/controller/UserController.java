@@ -33,7 +33,11 @@ public class UserController {
 	public String login(@ModelAttribute("login") UserLogin ul, Model m, HttpSession httpSession) {
 		try {
 			User u = service.login(ul.getLoginName(), ul.getPassword());
-
+			
+			String uname=(String) httpSession.getAttribute("uname");
+			
+			m.addAttribute("uname", uname);
+			
 			if (u == null) {
 
 				m.addAttribute("err", "Login Failed, username or password is incorrect");
@@ -42,7 +46,7 @@ public class UserController {
 				if (u.getRole() == IUserService.ROLE_ADMIN) {
 
 					sessionInUser(u, httpSession);
-
+					
 					return "redirect:/admin/dashboard";
 
 				} else if (u.getRole() == IUserService.ROLE_USER) {
@@ -83,6 +87,7 @@ public class UserController {
 		httpSession.setAttribute("user", u);
 		httpSession.setAttribute("userId", u.getUserId());
 		httpSession.setAttribute("role", u.getRole());
+		httpSession.setAttribute("uname", u.getName());
 
 	}
 	

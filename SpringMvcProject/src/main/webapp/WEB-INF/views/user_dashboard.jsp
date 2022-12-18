@@ -9,5 +9,8 @@
 <body>
 <%@include file="header.jsp" %>
 
+Hi
+
+
 </body>
 </html>
