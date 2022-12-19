@@ -46,8 +46,8 @@ public class ContactDaoImpl extends BaseDao implements IContactDao {
 	@Override
 	public void update(Contact c) {
 		// TODO Auto-generated method stub
-String sql = "update contact set name=:name, email=:email, phone=:phone, remarks=:remarks where contactId=:contactId";
-		
+		String sql = "update contact set name=:name, email=:email, phone=:phone, remarks=:remarks where contactId=:contactId";
+
 		Map m = new HashMap();
 
 		m.put("name", c.getName());
@@ -55,9 +55,9 @@ String sql = "update contact set name=:name, email=:email, phone=:phone, remarks
 		m.put("phone", c.getPhone());
 		m.put("remarks", c.getRemarks());
 		m.put("contactId", c.getContactId());
-		
+
 		getNamedParameterJdbcTemplate().update(sql, m);
-		
+
 	}
 
 	@Override
@@ -69,7 +69,7 @@ String sql = "update contact set name=:name, email=:email, phone=:phone, remarks
 	@Override
 	public void delete(int contactId) {
 		// TODO Auto-generated method stub
-		String sql="delete from contact where contactId=?";		
+		String sql = "delete from contact where contactId=?";
 		getJdbcTemplate().update(sql, contactId);
 	}
 
@@ -77,28 +77,27 @@ String sql = "update contact set name=:name, email=:email, phone=:phone, remarks
 	public Contact findById(int contactId) {
 		// TODO Auto-generated method stub
 		String sql = "select * from contact where contactId=?";
-		
-		Contact c=getJdbcTemplate().queryForObject(sql, new ContactRowMapper(),contactId);
-		
+
+		Contact c = getJdbcTemplate().queryForObject(sql, new ContactRowMapper(), contactId);
+
 		return c;
 	}
 
 	@Override
 	public List<Contact> findByProperty(String propertyName, Object objectValue) {
 		// TODO Auto-generated method stub
-		String sql="select contactId, userId, name, email, phone, remarks from contact where "+propertyName+"=?";
-		
+		String sql = "select contactId, userId, name, email, phone, remarks from contact where " + propertyName + "=?";
+
 		return getJdbcTemplate().query(sql, new ContactRowMapper(), objectValue);
 	}
 
 	@Override
 	public List<Contact> findAll() {
 		// TODO Auto-generated method stub
-		String sql="select userId, name, email, phone, remarks from contact";
-		
-		List<Contact> cList=getJdbcTemplate().query(sql, new ContactRowMapper());
-		
-		
+		String sql = "select userId, name, email, phone, remarks from contact";
+
+		List<Contact> cList = getJdbcTemplate().query(sql, new ContactRowMapper());
+
 		return cList;
 	}
 
