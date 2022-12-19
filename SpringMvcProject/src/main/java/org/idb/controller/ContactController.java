@@ -102,5 +102,28 @@ public class ContactController {
 
 		return "contact_form";
 	}
+	
+	
+	@RequestMapping(value = "/user/search_contact")
+	public String searchContactList(Model m, HttpSession httpSession, @RequestParam("freeText") String freeText) {
+
+		Integer userId = (Integer) httpSession.getAttribute("userId");
+		
+		List<Contact> contactList = service.findUserContact(userId, freeText);
+		m.addAttribute("contactList", contactList);
+
+		return "contact_list";
+
+	}
+	
+	
+	
+	@RequestMapping("/user/bulk_delete")
+	public String bulkDeleteContact(@RequestParam("contactId") Integer[] contactIds) {
+
+		service.delete(contactIds);
+
+		return "redirect:/user/contact_list?act=del";
+	}
 
 }
