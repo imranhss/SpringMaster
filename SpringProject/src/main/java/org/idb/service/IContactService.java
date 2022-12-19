@@ -11,6 +11,9 @@ public interface IContactService {
 	public void update(Contact c);
 
 	public void delete(int contactId);
+	
+	public Contact  findById(int contactId);
+
 
 	public void delete(Integer[] contactIds);
 

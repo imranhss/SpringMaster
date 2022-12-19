@@ -40,7 +40,7 @@ public class ContactServiceImpl extends BaseDao implements IContactService{
 	public void delete(Integer[] contactIds) {
 		// TODO Auto-generated method stub
 		String ids=StringUtility.toCommaSeparatedString(contactIds);
-		String sql="delete from contact where contactId in("+ids+"))";
+		String sql="delete from contact where contactId in("+ids+")";
 		getJdbcTemplate().update(sql);
 		
 		
@@ -58,10 +58,20 @@ public class ContactServiceImpl extends BaseDao implements IContactService{
 	public List<Contact> findUserContact(int userId, String txt) {
 		// TODO Auto-generated method stub
 		
-		String sql="select userId, name, email, phone, address, remarks from contact"
-				+ "where userId=? and (name like'%"+txt+"%' or address like'%"+txt+"%' or phone like'%"+txt+"%' or email like'%"+txt+"%'  or remarks like'%"+txt+"%')";
+		String sql="select * from contact "
+				+ " where userId=? and (name like'%"+txt+"%' or phone like'%"+txt+"%' or email like'%"+txt+"%'  or remarks like'%"+txt+"%')";
 		 return getJdbcTemplate().query(sql, new ContactRowMapper(), userId);
 		
 	}
+
+	@Override
+	public Contact findById(int contactId) {
+		// TODO Auto-generated method stub
+		
+		
+		return dao.findById(contactId);
+	}
+	
+	
 
 }

@@ -124,4 +124,12 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value={"/admin/users"})
+	public String getUsersList(Model m) {
+		m.addAttribute("userList", service.getUserList()) ;
+		
+		return "users";
+	} 
+	
+	
 }

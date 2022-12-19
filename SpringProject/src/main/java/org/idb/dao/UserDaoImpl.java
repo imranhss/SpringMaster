@@ -89,8 +89,8 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 	@Override
 	public List<User> findByProperty(String propertyName, Object objectValue) {
 		// TODO Auto-generated method stub
-		String sql="select userId, nama, phone, email, address,loginName, role, loginStatus from user"
-				+ " where"+propertyName+"=?";
+		String sql="select userId, name, phone, email, address,loginName, role, loginStatus from user"
+				+ " where "+propertyName+"=?";
 		
 		
 		return getJdbcTemplate().query(sql,new UserRowMapper(), objectValue);

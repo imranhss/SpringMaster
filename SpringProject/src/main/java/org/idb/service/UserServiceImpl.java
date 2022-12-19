@@ -51,7 +51,9 @@ public class UserServiceImpl extends BaseDao implements IUserService {
 	@Override
 	public List<User> getUserList() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.findByProperty("role", IUserService.ROLE_USER); 
+		
 	}
 
 	@Override
