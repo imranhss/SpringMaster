@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
+
 <%@include file="template.jsp"%>
-</head>
-<body>
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 
@@ -38,6 +35,3 @@
 			</div>
 		</div>
 	</nav>
-
-</body>
-</html>

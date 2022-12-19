@@ -8,11 +8,15 @@
 <body>
 	<%@include file="header.jsp"%>
 	<div class="container">
-
+		<h3 class="text-center">Contact List</h3>
 		<c:if test="${param.act eq 'add' }">
 			<p class="text-success text-center">New Contact Added</p>
 		</c:if>
-		
+
+		<c:if test="${param.act eq 'del' }">
+			<p class="text-success text-center">Contact Deleted</p>
+		</c:if>
+
 		<table class="table table-striped">
 			<tr>
 				<th>SN</th>
@@ -29,10 +33,11 @@
 					<td>${c.email}</td>
 					<td>${c.phone}</td>
 					<td>${c.remarks}</td>
-					<td></td>
-
+					<td><a href="/user/update_contact/?contactId=${c.contactId}"
+						class="btn btn-warning">Update</a> <a
+						href="/user/delete_contact/?contactId=${c.contactId}"
+						class="btn btn-danger">Delete</a></td>
 				</tr>
-
 			</c:forEach>
 
 		</table>

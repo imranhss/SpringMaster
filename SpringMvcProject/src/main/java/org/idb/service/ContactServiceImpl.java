@@ -62,6 +62,15 @@ public class ContactServiceImpl extends BaseDao implements IContactService{
 		 return getJdbcTemplate().query(sql, new ContactRowMapper(), userId);
 
 	}
+
+
+	@Override
+	public Contact findById(int contactId) {
+		// TODO Auto-generated method stub
+		
+		return dao.findById(contactId);		
+		 
+	}
 	
 	
 

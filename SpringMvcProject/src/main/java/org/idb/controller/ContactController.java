@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ContactController {
@@ -33,7 +34,7 @@ public class ContactController {
 	public String contactAdd(@ModelAttribute("contact") Contact c, Model m, HttpSession httpSession) {
 
 		Integer userId = (Integer) httpSession.getAttribute("userId");
-		
+
 		c.setUserId(userId);
 
 		service.save(c);
@@ -41,19 +42,36 @@ public class ContactController {
 		return "redirect:/user/contact_list?act=add";
 
 	}
-		
-	
+
 	@RequestMapping(value = "/user/contact_list")
 	public String contactList(Model m, HttpSession httpSession) {
-		
+
 		Integer userId = (Integer) httpSession.getAttribute("userId");
-		List<Contact> contactList=service.findUserContact(userId);		
-		
+		List<Contact> contactList = service.findUserContact(userId);
+
 		m.addAttribute("contactList", contactList);
 
 		return "contact_list";
 
 	}
-	
+
+	@RequestMapping("/user/delete_contact/")
+	public String deleteContact(@RequestParam("contactId") Integer contactId) {
+
+		service.delete(contactId);
+
+		return "redirect:/user/contact_list?act=del";
+	}
+
+	@RequestMapping("/user/update_contact/")
+	public String updateContact(@RequestParam("contactId") Integer contactId, Model m) {
+
+		//httpSession.setAttribute("aContactId", contactId);
+		Contact c = service.findById(contactId);
+		
+		m.addAttribute("contact", c);
+
+		return "contact_form";
+	}
 
 }
