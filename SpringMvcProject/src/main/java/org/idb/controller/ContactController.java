@@ -31,15 +31,43 @@ public class ContactController {
 	}
 
 	@RequestMapping(value = "/user/contact_reg", method = RequestMethod.POST)
-	public String contactAdd(@ModelAttribute("contact") Contact c, Model m, HttpSession httpSession) {
+	public String contactAddOrUpdate(@ModelAttribute("contact") Contact c, Model m, HttpSession httpSession) {
+		Integer contactId = (Integer) httpSession.getAttribute("aContactId");
 
-		Integer userId = (Integer) httpSession.getAttribute("userId");
+		System.out.println(contactId);
+		if (contactId == null) {
 
-		c.setUserId(userId);
+			try {
+				Integer userId = (Integer) httpSession.getAttribute("userId");
+				c.setUserId(userId);
+				service.save(c);
 
-		service.save(c);
+				m.addAttribute("contact", c);
+				return "redirect:/user/contact_list?act=add";
 
-		return "redirect:/user/contact_list?act=add";
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				m.addAttribute("err", "failed to add new Contact");
+				return "contact_form";
+			}
+		}
+
+		else {
+			try {
+				c.setContactId(contactId);
+				service.update(c);
+				m.addAttribute("contact", c);
+
+				return "redirect:/user/contact_list?act=ed";
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				m.addAttribute("err", "failed to Edit Contact");
+				return "contact_form";
+			}
+
+		}
 
 	}
 
@@ -64,11 +92,12 @@ public class ContactController {
 	}
 
 	@RequestMapping("/user/update_contact/")
-	public String updateContact(@RequestParam("contactId") Integer contactId, Model m) {
+	public String updateContact(@RequestParam("contactId") Integer contactId, Model m, HttpSession httpSession) {
 
-		//httpSession.setAttribute("aContactId", contactId);
+		httpSession.setAttribute("aContactId", contactId);
+
 		Contact c = service.findById(contactId);
-		
+
 		m.addAttribute("contact", c);
 
 		return "contact_form";
