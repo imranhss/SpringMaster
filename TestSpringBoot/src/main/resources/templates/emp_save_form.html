@@ -1,0 +1,98 @@
+<div th:insert="header.html">...</div>
+<div th:insert="sidebar.html">...</div>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Form Elements</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index">Home</a></li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">Elements</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-md-10 offset-1">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">General Form Elements</h5>
+
+                        <!-- General Form Elements -->
+                        <form  th:action="@{/emp_save}" th:object="${employee}" method="post">
+                            <input type="hidden" th:field="*{eid}">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" th:field="*{eName}" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" th:field="*{eEmail}" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Address</label>
+                                <div class="col-sm-10">
+                                    <textarea rows="3" class="form-control" th:field="*{eAddress}" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Department</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" aria-label="Default select example" th:field="*{eDepartment}">
+                                        <option th:value="select">--Select--</option>
+                                        <option th:value="MKT"  >MKT</option>
+                                        <option th:value="SALES"  >SALES</option>
+                                        <option th:value="Admin"  >Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Gender</label>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{eGender}"
+                                                value="Male"  name="gender"/>
+                                        <label class="form-check-label" >
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" th:field="*{eGender}"
+                                                value="Female" name="gender"   />
+                                        <label class="form-check-label" >
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+
+                                <div class="col-md-12 text-center">
+                                    <button type="submit" class="btn btn-primary">Submit Form</button>
+
+                                </div>
+                            </div>
+
+                        </form><!-- End General Form Elements -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<div th:insert="footer.html">...</div>
