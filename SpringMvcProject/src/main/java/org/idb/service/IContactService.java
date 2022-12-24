@@ -11,6 +11,8 @@ public interface IContactService {
 	public void update(Contact c);
 
 	public void delete(int contactId);
+	
+	public Contact findById(int contactId);
 
 	//Delete more than one contact at a time
 	public void delete(Integer[] contactIds);

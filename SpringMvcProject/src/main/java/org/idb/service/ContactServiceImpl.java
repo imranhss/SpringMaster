@@ -55,12 +55,21 @@ public class ContactServiceImpl extends BaseDao implements IContactService{
 	@Override
 	public List<Contact> findUserContact(int userId, String txt) {
 		// TODO Auto-generated method stub
-		String sql="select userId, name, email, phone,  remarks from contact"
-				+ "where userId=? and (name like'%"+txt+"%' "
-						+ "or phone like'%"+txt+"%' or email like'%"+txt+"%'  "
+		String sql="select * from contact"
+				+ " where userId=? and (name like'%"+txt+"%' "
+						+ "or phone like'%"+txt+"%' or email like'%"+txt+"%' "
 								+ "or remarks like'%"+txt+"%')";
 		 return getJdbcTemplate().query(sql, new ContactRowMapper(), userId);
 
+	}
+
+
+	@Override
+	public Contact findById(int contactId) {
+		// TODO Auto-generated method stub
+		
+		return dao.findById(contactId);		
+		 
 	}
 	
 	
