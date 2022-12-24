@@ -25,4 +25,14 @@ public class DepartmentController {
 
         return  "department_list";
     }
+
+    @RequestMapping("/department/form")
+    public String departmentForm(Model m) {
+        m.addAttribute("departmentLis", new Department());
+        m.addAttribute("title", "Add Department");
+
+        return  "department_list";
+    }
+
+
 }

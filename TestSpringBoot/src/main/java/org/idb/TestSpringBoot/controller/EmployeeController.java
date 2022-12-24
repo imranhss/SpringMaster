@@ -1,6 +1,8 @@
 package org.idb.TestSpringBoot.controller;
 
+import org.idb.TestSpringBoot.entity.Department;
 import org.idb.TestSpringBoot.entity.Employee;
+import org.idb.TestSpringBoot.service.DepartmentService;
 import org.idb.TestSpringBoot.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,44 +21,54 @@ public class EmployeeController {
     @Autowired
     EmployeeService service;
 
+    @Autowired
+    DepartmentService depService;
+
     @RequestMapping(value = {"/", "/index"})
-    public  String home(){
+    public String home() {
 
         return "index";
     }
 
     @RequestMapping("/emp_list")
-    public String allEmp(Model m){
-        List<Employee> employeeList=service.getAllEmp();
+    public String allEmp(Model m) {
+        List<Employee> employeeList = service.getAllEmp();
+
         m.addAttribute("employeeList", employeeList);
         m.addAttribute("title", "All Employee");
         return "employee_list";
     }
 
     @RequestMapping("/emp_save_form")
-    public  String empSaveForm(Model m){
+    public String empSaveForm(Model m) {
+        List<Department> departmentList = depService.getAllDep();
+        m.addAttribute("departmentList", departmentList);
         m.addAttribute("employee", new Employee());
         return "emp_save_form";
     }
+
     @RequestMapping(value = "/emp_save", method = RequestMethod.POST)
-    public  String empSave(@ModelAttribute("employee") Employee e, Model m){
+    public String empSave(@ModelAttribute("employee") Employee e, Model m) {
         service.saveEmp(e);
         m.addAttribute("title", "Add Employee");
         return "redirect:/emp_list";
     }
 
     @RequestMapping("/emp_delete/{eid}")
-    public  String empDelete(@PathVariable("eid") Integer eid){
+    public String empDelete(@PathVariable("eid") Integer eid) {
         service.deleteEmp(eid);
         return "redirect:/emp_list";
     }
 
     @RequestMapping("/emp_edit/{eid}")
-    public  String empEditForm(@PathVariable("eid") Integer eid, Model m){
-         Employee e=service.findEmpById(eid);
-         m.addAttribute("employee", e);
+    public String empEditForm(@PathVariable("eid") Integer eid, Model m) {
+        Employee e = service.findEmpById(eid);
+        m.addAttribute("employee", e);
+        List<Department> departmentList = depService.getAllDep();
+        m.addAttribute("departmentList", departmentList);
         return "emp_save_form";
     }
+
 
 
 

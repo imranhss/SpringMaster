@@ -24,8 +24,7 @@ public class Employee {
     private  String eAddress;
     @Column(length = 12, nullable = false)
     private  String eGender;
-    @Column(length = 25, nullable = false)
-    private  String eDepartment;
+
     @ManyToOne
     @JoinColumn(name = "did_fk")
     Department department;
