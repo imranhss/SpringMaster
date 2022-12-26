@@ -1,6 +1,5 @@
 package org.idb.TestSpringBoot.controller;
 
-import org.idb.TestSpringBoot.entity.Department;
 import org.idb.TestSpringBoot.entity.Employee;
 import org.idb.TestSpringBoot.service.DepartmentService;
 import org.idb.TestSpringBoot.service.EmployeeService;
@@ -22,7 +21,7 @@ public class EmployeeController {
     EmployeeService service;
 
     @Autowired
-    DepartmentService depService;
+    DepartmentService dService;
 
     @RequestMapping(value = {"/", "/index"})
     public String home() {
@@ -33,7 +32,6 @@ public class EmployeeController {
     @RequestMapping("/emp_list")
     public String allEmp(Model m) {
         List<Employee> employeeList = service.getAllEmp();
-
         m.addAttribute("employeeList", employeeList);
         m.addAttribute("title", "All Employee");
         return "employee_list";
@@ -41,9 +39,8 @@ public class EmployeeController {
 
     @RequestMapping("/emp_save_form")
     public String empSaveForm(Model m) {
-        List<Department> departmentList = depService.getAllDep();
-        m.addAttribute("departmentList", departmentList);
         m.addAttribute("employee", new Employee());
+        m.addAttribute("depList", dService.getAllDep());
         return "emp_save_form";
     }
 
@@ -64,12 +61,9 @@ public class EmployeeController {
     public String empEditForm(@PathVariable("eid") Integer eid, Model m) {
         Employee e = service.findEmpById(eid);
         m.addAttribute("employee", e);
-        List<Department> departmentList = depService.getAllDep();
-        m.addAttribute("departmentList", departmentList);
+        m.addAttribute("depList", dService.getAllDep());
         return "emp_save_form";
     }
-
-
 
 
 }

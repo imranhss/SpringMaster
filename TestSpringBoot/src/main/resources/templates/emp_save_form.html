@@ -20,29 +20,28 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h3 th:if="${eid == null}" class="text-center mt-2">Add Employee</h3>
-                        <h3 th:if="${eid != null}" class="text-center mt-2">Edit Employee</h3>
-
+                        <h3 th:if="${eid==null}" class="card-title text-center mt-2">Add Employee</h3>
+                        <h3 th:if="${eid!=null}" class="card-title text-center mt-2">Edit Employee</h3>
 
                         <!-- General Form Elements -->
-                        <form th:action="@{/emp_save}" th:object="${employee}" method="post">
+                        <form  th:action="@{/emp_save}" th:object="${employee}" method="post">
                             <input type="hidden" th:field="*{eid}">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" th:field="*{eName}"/>
+                                    <input type="text" class="form-control" th:field="*{eName}" />
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" th:field="*{eEmail}"/>
+                                    <input type="email" class="form-control" th:field="*{eEmail}" />
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Address</label>
                                 <div class="col-sm-10">
-                                    <textarea rows="3" class="form-control" th:field="*{eAddress}"/>
+                                    <textarea rows="3" class="form-control" th:field="*{eAddress}" />
                                 </div>
                             </div>
 
@@ -51,9 +50,8 @@
                                 <div class="col-sm-10">
                                     <select class="form-select" aria-label="Default select example"
                                             th:field="*{department}">
-                                        <th:block th:each="dep:${departmentList}">
-                                            <option th:text="${dep.dName}" th:value="${dep.did}" />
-                                        </th:block>
+                                        <option th:each="d:${depList}"  th:value="${d.did}"
+                                                th:text="${d.dName}">--Select--</option>
 
                                     </select>
                                 </div>
@@ -63,15 +61,15 @@
                                 <div class="col-sm-10">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" th:field="*{eGender}"
-                                               value="Male" name="gender"/>
-                                        <label class="form-check-label">
+                                                value="Male"  name="gender"/>
+                                        <label class="form-check-label" >
                                             Male
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" th:field="*{eGender}"
-                                               value="Female" name="gender"/>
-                                        <label class="form-check-label">
+                                                value="Female" name="gender"   />
+                                        <label class="form-check-label" >
                                             Female
                                         </label>
                                     </div>
@@ -81,8 +79,8 @@
                             <div class="row mb-3">
 
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary" th:if="${eid == null}">Save</button>
-                                    <button type="submit" class="btn btn-primary" th:unless="${eid == null}">Update</button>
+                                    <button th:if="${eid!=null}" type="submit" class="btn btn-primary">Update</button>
+                                    <button th:if="${eid==null}" type="submit" class="btn btn-primary">Submit</button>
 
                                 </div>
                             </div>
