@@ -19,11 +19,10 @@ public class EmployeeController {
 
     @Autowired
     EmployeeService service;
-
     @Autowired
     DepartmentService dService;
 
-    @RequestMapping(value = {"/", "/index"})
+    @RequestMapping(value = {"", "/index", "/home"})
     public String home() {
 
         return "index";
@@ -39,15 +38,16 @@ public class EmployeeController {
 
     @RequestMapping("/emp_save_form")
     public String empSaveForm(Model m) {
-        m.addAttribute("employee", new Employee());
+        m.addAttribute("emp", new Employee());
         m.addAttribute("depList", dService.getAllDep());
+        m.addAttribute("title", "Add Employee");
         return "emp_save_form";
     }
 
     @RequestMapping(value = "/emp_save", method = RequestMethod.POST)
-    public String empSave(@ModelAttribute("employee") Employee e, Model m) {
+    public String empSave(@ModelAttribute("emp") Employee e, Model m) {
         service.saveEmp(e);
-        m.addAttribute("title", "Add Employee");
+
         return "redirect:/emp_list";
     }
 
@@ -60,7 +60,7 @@ public class EmployeeController {
     @RequestMapping("/emp_edit/{eid}")
     public String empEditForm(@PathVariable("eid") Integer eid, Model m) {
         Employee e = service.findEmpById(eid);
-        m.addAttribute("employee", e);
+        m.addAttribute("emp", e);
         m.addAttribute("depList", dService.getAllDep());
         return "emp_save_form";
     }

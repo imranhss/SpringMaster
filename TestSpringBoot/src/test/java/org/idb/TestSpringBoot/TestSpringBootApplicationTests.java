@@ -17,10 +17,8 @@ class TestSpringBootApplicationTests {
 		Employee e=new Employee();
 		e.setEAddress("Dhaka");
 		e.setEEmail("dhaka@gmail.com");
-		e.setEDepartment("MKT");
 		e.setEGender("Male");
 		e.setEName("Jahid");
-
 		service.saveEmp(e);
 
 	}

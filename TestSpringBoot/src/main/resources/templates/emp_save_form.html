@@ -24,7 +24,7 @@
                         <h3 th:if="${eid!=null}" class="card-title text-center mt-2">Edit Employee</h3>
 
                         <!-- General Form Elements -->
-                        <form  th:action="@{/emp_save}" th:object="${employee}" method="post">
+                        <form  th:action="@{/emp_save}" th:object="${emp}" method="post">
                             <input type="hidden" th:field="*{eid}">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Name</label>
@@ -51,7 +51,7 @@
                                     <select class="form-select" aria-label="Default select example"
                                             th:field="*{department}">
                                         <option th:each="d:${depList}"  th:value="${d.did}"
-                                                th:text="${d.dName}">--Select--</option>
+                                                th:text="${d.dCode}">--Select--</option>
 
                                     </select>
                                 </div>

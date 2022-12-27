@@ -18,4 +18,8 @@ public class Department {
 
     @Column(length = 30, nullable = false)
     private  String dName;
+
+    @Column(length = 30, nullable = false)
+    private  String dCode;
+
 }

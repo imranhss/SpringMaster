@@ -19,13 +19,13 @@ public class DepartmentController {
     @RequestMapping("/departments")
     public  String allDep(Model m){
 //        List<Department> listDep=service.getAllDep();
-        m.addAttribute("viewDep", service.getAllDep());
-        m.addAttribute("dep", new Department());
+        m.addAttribute("viewDep", service.getAllDep());// Show All Department as a Table
+        m.addAttribute("dep", new Department()); // Show save form for Department
         return  "dep_list";
     }
 
     @RequestMapping(value = "/dep_save", method = RequestMethod.POST)
-    public  String addDep(@ModelAttribute("dep") Department dep, Model m){
+    public  String addDep(@ModelAttribute("dep") Department dep){
         service.saveDep(dep);
         return  "redirect:/departments";
     }
