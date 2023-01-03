@@ -1,16 +1,33 @@
 package org.idb.TestSpringBoot;
 
+import org.idb.TestSpringBoot.entity.AppUserRole;
 import org.idb.TestSpringBoot.entity.Employee;
+import org.idb.TestSpringBoot.entity.User;
+import org.idb.TestSpringBoot.repository.IUserRepo;
 import org.idb.TestSpringBoot.service.EmployeeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootTest
 class TestSpringBootApplicationTests {
 
 	@Autowired
 	EmployeeService service;
+
+	@Autowired
+	IUserRepo repo;
+
+	@Test
+	void testUserSave(){
+		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+		String encodePass=encoder.encode("1234");
+
+		User user=new User("emran@gmail.com", encodePass,"Emran", "Hossain", AppUserRole.USER, true, true);
+		repo.save(user);
+	}
 
 	@Test
 	void testEmpSave(){
@@ -22,6 +39,7 @@ class TestSpringBootApplicationTests {
 		service.saveEmp(e);
 
 	}
+
 
 	@Test
 	void TestDelEmp(){
@@ -35,5 +53,7 @@ class TestSpringBootApplicationTests {
 		service.saveEmp(e);
 		System.out.println(e);
 	}
+
+
 
 }

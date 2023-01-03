@@ -29,6 +29,27 @@ public class User {
     @Column(length = 30, nullable = false)
     private  String lastName;
 
+    @Enumerated(EnumType.STRING)
+    private  AppUserRole userRole;
 
+    private  Boolean loocked;
+    private  Boolean enable;
+
+
+    public User(String email,
+                String password,
+                String firstName,
+                String lastName,
+                AppUserRole userRole,
+                Boolean loocked,
+                Boolean enable) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userRole = userRole;
+        this.loocked = loocked;
+        this.enable = enable;
+    }
 
 }
