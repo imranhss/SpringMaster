@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class UserController {
     @Autowired
@@ -22,11 +25,13 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public String registerForm(Model m) {
-
+    public String registerForm(Model m, HttpServletRequest request) {
 
         m.addAttribute("user", new User());
         m.addAttribute("title", "Add User");
+
+        String url=request.getRequestURI();
+        System.out.println(url);
         return "signup_form";
     }
 
