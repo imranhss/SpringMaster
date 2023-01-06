@@ -25,7 +25,9 @@ class TestSpringBootApplicationTests {
 		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
 		String encodePass=encoder.encode("1234");
 
-		User user=new User("emran@gmail.com", encodePass,"Emran", "Hossain", AppUserRole.USER, true, true);
+		User user=new User("rana@gmail.com", encodePass,"Emran", "Hossain", AppUserRole.USER);
+		user.setEnable(true);
+		user.setLoocked(false);
 		repo.save(user);
 	}
 

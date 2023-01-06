@@ -40,16 +40,14 @@ public class User {
                 String password,
                 String firstName,
                 String lastName,
-                AppUserRole userRole,
-                Boolean loocked,
-                Boolean enable) {
+                AppUserRole userRole
+                ) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userRole = userRole;
-        this.loocked = loocked;
-        this.enable = enable;
+
     }
 
 }
